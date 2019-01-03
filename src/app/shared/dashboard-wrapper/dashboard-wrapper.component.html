@@ -1,0 +1,37 @@
+<div class="dashboardContainer" [class.isMobile]="mobileQuery.matches">
+  <mat-toolbar color="primary" class="toolbar">
+    <div>
+      <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
+      <h1>Decorasaurus Dashboard</h1>
+    </div>
+    <div>
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>account_circle</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="producerService.logoutProducer()">
+          <span>Logout</span>
+        </button>
+      </mat-menu>
+    </div>
+  </mat-toolbar>
+
+  <mat-sidenav-container class="sidenavContainer" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+    <mat-sidenav 
+      #snav 
+      [mode]="mobileQuery.matches ? 'over' : 'side'"
+      [fixedInViewport]="mobileQuery.matches"
+      fixedTopGap="56"
+      [opened]="true"
+    >
+      <div class="drawerItem" *ngFor="let option of navOptions" (click)="router.navigateByUrl('/' + option.value)">
+        <mat-icon>{{option.icon}}</mat-icon>
+        <div>{{option.label}}</div>
+      </div>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <ng-content></ng-content>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
