@@ -1,9 +1,9 @@
 import { DocumentNode } from 'graphql';
 import gql from 'graphql-tag';
 
-export const registerUserProducerMutation: DocumentNode = gql`
-  mutation registerUserProducer($email: String!, $password: String!) {
-    registerUserProducer(input: {
+export const registerAdminAccountMutation: DocumentNode = gql`
+  mutation registerAdminAccount($email: String!, $password: String!) {
+    registerAdminAccount(input: {
       email: $email,
       password: $password
     })
@@ -15,9 +15,9 @@ export const registerUserProducerMutation: DocumentNode = gql`
   }
 `;
 
-export const authUserProducerMutation: DocumentNode = gql`
-  mutation authenticateUserProducer($email: String!, $password: String!) {
-    authenticateUserProducer(input:{
+export const authAdminAccountMutation: DocumentNode = gql`
+  mutation authenticateAdminAccount($email: String!, $password: String!) {
+    authenticateAdminAccount(input:{
       email: $email,
       password: $password
     }) {

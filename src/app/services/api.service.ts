@@ -9,12 +9,14 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 
 // mutations
 import {
-  registerUserProducerMutation,
-  authUserProducerMutation
-} from '../api/mutations/producer.mutation';
+  registerAdminAccountMutation,
+  authAdminAccountMutation
+} from '../api/mutations/admin.mutation';
 
-import { currentProducerQuery } from '../api/queries/producer.query';
+import { currentAdminQuery } from '../api/queries/admin.query';
 import { allOrdersQuery, orderByIdQuery } from '../api/queries/order.query';
+import { allCustomersQuery, customerByIdQuery } from '../api/queries/customer.query';
+import { allProductsQuery, productBySkuQuery } from '../api/queries/product.query';
 
 @Injectable()
 export class APIService {
@@ -29,9 +31,9 @@ export class APIService {
   // ************************* Queries *********************************
   // *******************************************************************
 
-  getCurrentProducer(): any {
+  getCurrentAdmin(): any {
     return this.apollo.watchQuery<any>({
-      query: currentProducerQuery
+      query: currentAdminQuery
     });
   }
   getAllOrders(): any {
@@ -47,15 +49,41 @@ export class APIService {
       }
     });
   }
+  getAllCustomers(): any {
+    return this.apollo.watchQuery<any>({
+      query: allCustomersQuery
+    });
+  }
+  getCustomerById(customerId: string): any {
+    return this.apollo.watchQuery<any>({
+      query: customerByIdQuery,
+      variables: {
+        customerId
+      }
+    });
+  }
+  getAllProducts(): any {
+    return this.apollo.watchQuery<any>({
+      query: allProductsQuery
+    });
+  }
+  getProductBySku(productSku: string): any {
+    return this.apollo.watchQuery<any>({
+      query: productBySkuQuery,
+      variables: {
+        productSku
+      }
+    });
+  }
 
   // *******************************************************************
   // ************************* Mutations *********************************
   // *******************************************************************
 
-  // Create Producer
-  registerProducer(email: string, password: string) {
+  // Create Admin
+  registerAdmin(email: string, password: string) {
     return this.apollo.mutate({
-      mutation: registerUserProducerMutation,
+      mutation: registerAdminAccountMutation,
       variables: {
         email,
         password
@@ -63,10 +91,10 @@ export class APIService {
     });
   }
 
-  // Auth Producer
-  authProducer(email: string, password: string): Observable<any> {
+  // Auth Admin
+  authAdmin(email: string, password: string): Observable<any> {
     return this.apollo.mutate({
-      mutation: authUserProducerMutation,
+      mutation: authAdminAccountMutation,
       variables: {
         email,
         password

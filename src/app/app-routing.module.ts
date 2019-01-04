@@ -13,15 +13,7 @@ const routes: Routes = [
     loadChildren: './modules/home/home.module#HomeModule',
     canActivate: [RoleGuard],
     data: {
-      expectedRole: ['decorasaurus_admin', 'decorasaurus_producer']
-    }
-  },
-  {
-    path: 'order',
-    loadChildren: './modules/order/order.module#OrderModule',
-    canActivate: [RoleGuard],
-    data: {
-      expectedRole: ['decorasaurus_admin', 'decorasaurus_producer']
+      expectedRole: ['decorasaurus_admin']
     }
   },
   {
@@ -29,7 +21,23 @@ const routes: Routes = [
     loadChildren: './modules/orders/orders.module#OrdersModule',
     canActivate: [RoleGuard],
     data: {
-      expectedRole: ['decorasaurus_admin', 'decorasaurus_producer']
+      expectedRole: ['decorasaurus_admin']
+    }
+  },
+  {
+    path: 'customers',
+    loadChildren: './modules/customers/customers.module#CustomersModule',
+    canActivate: [RoleGuard],
+    data: {
+      expectedRole: ['decorasaurus_admin']
+    }
+  },
+  {
+    path: 'products',
+    loadChildren: './modules/products/products.module#ProductsModule',
+    canActivate: [RoleGuard],
+    data: {
+      expectedRole: ['decorasaurus_admin']
     }
   },
   { path: 'login', loadChildren: './modules/login/login.module#LoginModule' },

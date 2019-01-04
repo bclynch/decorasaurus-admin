@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm, Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
-import { ProducerService } from 'src/app/services/producer.service';
+import { AdminService } from 'src/app/services/admin.service';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -24,21 +24,21 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private producerService: ProducerService
+    private adminService: AdminService
   ) {
-    
+
   }
 
   ngOnInit() {
   }
 
-  loginProducer(e?) {
+  loginAdmin(e?) {
     if (e) e.preventDefault();
 
-    this.producerService.loginProducer(this.loginForm.value.email, this.loginForm.value.password);
+    this.adminService.loginAdmin(this.loginForm.value.email, this.loginForm.value.password);
   }
 
-  registerProducer() {
-    this.producerService.createProducer(this.loginForm.value.email, this.loginForm.value.password);
+  registerAdmin() {
+    if (this.loginForm.valid) this.adminService.createAdmin(this.loginForm.value.email, this.loginForm.value.password);
   }
 }

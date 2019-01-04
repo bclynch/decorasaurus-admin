@@ -7,7 +7,7 @@ import { SettingsService } from './services/settings.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'decorasaurus-dashboard';
+  title = 'decorasaurus-admin';
 
   constructor(
     private settingsService: SettingsService

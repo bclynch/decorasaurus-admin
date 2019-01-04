@@ -1,6 +1,6 @@
 <div class="loginContainer">
-  <form [formGroup]="loginForm" (ngSubmit)="loginProducer($event)">
-    <h1>Decorasaurus</h1>
+  <form [formGroup]="loginForm" (ngSubmit)="loginAdmin($event)">
+    <h1>Decorasaurus Admin</h1>
     <mat-form-field>
       <input
         matInput
@@ -19,6 +19,6 @@
       />
     </mat-form-field>
     <button mat-flat-button color="primary" type="submit">Login</button>
-    <button mat-button color="primary" (click)="registerProducer()">Register...</button>
+    <button mat-button color="primary" (click)="registerAdmin()">Register...</button>
   </form>
 </div>

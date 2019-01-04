@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { Router } from '@angular/router';
-import { ProducerService } from 'src/app/services/producer.service';
+import { AdminService } from 'src/app/services/admin.service';
 
 @Component({
   selector: 'app-dashboard-wrapper',
@@ -13,6 +13,8 @@ export class DashboardWrapperComponent implements OnInit, OnDestroy {
   mobileQuery: MediaQueryList;
   navOptions = [
     { label: 'Home', value: 'home', icon: 'home' },
+    { label: 'Products', value: 'products', icon: 'burst_mode' },
+    { label: 'Customers', value: 'customers', icon: 'supervisor_account' },
     { label: 'Orders', value: 'orders', icon: 'receipt' }
   ];
 
@@ -22,7 +24,7 @@ export class DashboardWrapperComponent implements OnInit, OnDestroy {
     changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher,
     private router: Router,
-    private producerService: ProducerService
+    private adminService: AdminService
   ) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();

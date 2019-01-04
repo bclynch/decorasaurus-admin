@@ -1,0 +1,26 @@
+<app-dashboard-wrapper>
+  <div class="productContainer" *ngIf="product">
+    <div class="productHeader">
+      <div>{{product.name}}</div>
+      <div>{{product.status}}</div>
+    </div>
+    <div class="section detailsSection">
+      <h3 class="title">Product Details</h3>
+      <div class="content">
+        <div class="row">
+          <div class="label">SKU: </div>
+          <div>{{product.sku}}</div>
+        </div>
+        <div class="row">
+          <div class="label">Description: </div>
+          <div>{{product.description}}</div>
+        </div>
+        <div class="row">
+          <div class="label">Created: </div>
+          <div>{{product.createdAt | date: 'M/d/yy, H:mm'}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-dashboard-wrapper>
+

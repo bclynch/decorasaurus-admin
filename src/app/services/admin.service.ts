@@ -10,15 +10,15 @@ import { Apollo } from 'apollo-angular';
 @Injectable({
   providedIn: 'root'
 })
-export class ProducerService {
+export class AdminService {
 
-  producerUuid: string;
-  producerObject: {
+  adminUuid: string;
+  adminObject: {
     id: string;
     email: string;
   };
 
-  public producerToken: BehaviorSubject<string>;
+  public adminToken: BehaviorSubject<string>;
 
   constructor(
     private apiService: APIService,
@@ -27,20 +27,20 @@ export class ProducerService {
     private router: Router,
     private apollo: Apollo
   ) {
-    this.producerToken = new BehaviorSubject<string>(null);
+    this.adminToken = new BehaviorSubject<string>(null);
   }
 
   fetchUser(): Promise<void> {
     return new Promise((resolve, reject) => {
-      this.apiService.getCurrentProducer().valueChanges.subscribe(({ data }) => {
+      this.apiService.getCurrentAdmin().valueChanges.subscribe(({ data }) => {
         console.log(data);
 
-        // if logged in set our producer id and set the token
-        if (data.currentProducer) {
-          this.producerObject = data.currentProducer;
-          console.log(this.producerObject);
+        // if logged in set our admin id and set the token
+        if (data.currentAdmin) {
+          this.adminObject = data.currentAdmin;
+          console.log(this.adminObject);
           const cookieToken = this.cookieService.get('decorasaurus-token');
-          if (cookieToken) this.producerToken.next(cookieToken);
+          if (cookieToken) this.adminToken.next(cookieToken);
         } else {
           // if it doesnt exist dump the token
           // this.cookieService.delete('decorasaurus-token');
@@ -50,23 +50,23 @@ export class ProducerService {
     });
   }
 
-  createProducer(email: string, password: string): void {
-    this.apiService.registerProducer(email, password).subscribe(
+  createAdmin(email: string, password: string): void {
+    this.apiService.registerAdmin(email, password).subscribe(
       () =>  {
-        this.loginProducer(email, password);
+        this.loginAdmin(email, password);
       },
       err => console.log(err)
     );
   }
 
-  loginProducer(email: string, password: string) {
-      this.apiService.authProducer(email, password).subscribe(({data}) => {
+  loginAdmin(email: string, password: string) {
+      this.apiService.authAdmin(email, password).subscribe(({data}) => {
         console.log(data);
-        if (data.authenticateUserProducer.jwtToken) {
+        if (data.authenticateAdminAccount.jwtToken) {
           // reset apollo cache and refetch queries
           this.apollo.getClient().resetStore();
-          this.cookieService.set('decorasaurus-token', data.authenticateUserProducer.jwtToken);
-          this.producerToken.next(data.authenticateUserProducer.jwtToken);
+          this.cookieService.set('decorasaurus-token', data.authenticateAdminAccount.jwtToken);
+          this.adminToken.next(data.authenticateAdminAccount.jwtToken);
 
           this.router.navigateByUrl('/');
           window.location.reload();
@@ -84,10 +84,10 @@ export class ProducerService {
       });
   }
 
-  logoutProducer() {
+  logoutAdmin() {
     this.cookieService.delete('decorasaurus-token');
-    this.producerToken.next(null);
-    this.producerObject = null;
+    this.adminToken.next(null);
+    this.adminObject = null;
 
     // reset apollo cache and refetch queries
     this.apollo.getClient().resetStore();

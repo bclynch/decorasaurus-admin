@@ -16,9 +16,11 @@ import { setContext } from 'apollo-link-context';
 
 import { CookieService } from 'ngx-cookie-service';
 import { SettingsService } from './services/settings.service';
-import { ProducerService } from './services/producer.service';
+import { AdminService } from './services/admin.service';
 import { APIService } from './services/api.service';
 import { OrderService } from './services/order.service';
+import { CustomerService } from './services/customer.service';
+import { ProductService } from './services/product.service';
 import { RoleGuardService } from './services/roleGuard.service';
 
 @NgModule({
@@ -38,10 +40,12 @@ import { RoleGuardService } from './services/roleGuard.service';
   providers: [
     CookieService,
     SettingsService,
-    ProducerService,
+    AdminService,
     APIService,
     OrderService,
-    RoleGuardService
+    RoleGuardService,
+    CustomerService,
+    ProductService
   ],
   bootstrap: [AppComponent]
 })

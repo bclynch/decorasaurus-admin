@@ -1,0 +1,21 @@
+.productsContainer {
+  padding: 10px;
+  
+  mat-form-field {
+    cursor: pointer;
+    width: 100%;
+  }
+  table {
+    width: 100%;
+
+    .productRow {
+      cursor: pointer;
+    }
+  }
+  @media (min-width: 768px) {
+    mat-form-field {
+      cursor: pointer;
+      width: 300px;
+    }
+  }
+}

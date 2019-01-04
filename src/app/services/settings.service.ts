@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable} from 'rxjs';
-import { ProducerService } from './producer.service';
+import { AdminService } from './admin.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,14 +10,14 @@ export class SettingsService {
   private _subject: BehaviorSubject<any>;
 
   constructor(
-    private producerService: ProducerService
+    private adminService: AdminService
   ) {
     this._subject = new BehaviorSubject<boolean>(false);
     this.appInited = this._subject;
   }
 
   appInit() {
-    this.producerService.fetchUser().then(
+    this.adminService.fetchUser().then(
       () => this._subject.next(true)
     );
   }

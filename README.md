@@ -4,30 +4,18 @@
 - Setup a router guard with login auth page
   - Can be finicky on login
 - Home orders page with a bit of reporting / graphs
-- Orders page with table of orders
-  - Setup sorting
+- ~~Orders page with table of orders~~
+  - ~~Setup sorting~~
   - Setup filtering
     - Just a dynamic call to the generic api endpoint with our filter options. Some simple stuff like by status, shipped, and maybe created (last day, week, etc)
+  - ~~Search capability~~
   - Export to CSV
     - https://stackoverflow.com/questions/14964035/how-to-export-javascript-array-info-to-csv-on-client-side
-- Order item page
+- ~~Order item page~~
   - Ability to process fusions
-- Search capability
-- Ability to edit status / shipping of orders
-- Ability to print shipping labels
-  - https://goshippo.com/
-  - ~~Create label~~
-  - Expand data model to include shipping info
-  - ~~Verify address~~
-  - Tracking
-  - Webhook. Try and wire up with email to send something out when it changes to order has shipped
-    - Create webhook here https://app.goshippo.com/settings/api/
-    - For tracking status updates. The POST request body will contain a JSON of the Tracking object.
-    - Server needs to be live with a real ip address to test
-- Consider adding status to individual order items because maybe one is done and not the other.
 
 ## Inspiration
-  - Will need a role for our poster producer accounts that would have access to orders, but probably not the rest and then an admin dash which has orders, customers, sales, usage analytics, reports, and other good stuff
+  - Will need a role for our poster admin accounts that would have access to orders, but probably not the rest and then an admin dash which has orders, customers, sales, usage analytics, reports, and other good stuff
   - http://help.wanelo.com/customer/portal/articles/1790355-how-do-i-fulfill-an-order-
   - Shopify has solid responsive dash too
   - Moltin

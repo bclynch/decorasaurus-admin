@@ -1,9 +1,9 @@
 import { DocumentNode } from 'graphql';
 import gql from 'graphql-tag';
 
-export const currentProducerQuery: DocumentNode = gql`
-  query currentProducer {
-    currentProducer {
+export const currentAdminQuery: DocumentNode = gql`
+  query currentAdmin {
+    currentAdmin {
       id,
       email
     }
