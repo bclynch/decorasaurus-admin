@@ -21,6 +21,8 @@ import { APIService } from './services/api.service';
 import { OrderService } from './services/order.service';
 import { CustomerService } from './services/customer.service';
 import { ProductService } from './services/product.service';
+import { UtilService } from './services/util.service';
+import { FloydService } from './services/floyd.service';
 import { RoleGuardService } from './services/roleGuard.service';
 
 @NgModule({
@@ -45,7 +47,9 @@ import { RoleGuardService } from './services/roleGuard.service';
     OrderService,
     RoleGuardService,
     CustomerService,
-    ProductService
+    ProductService,
+    UtilService,
+    FloydService
   ],
   bootstrap: [AppComponent]
 })

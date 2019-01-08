@@ -1,3 +1,9 @@
 <app-dashboard-wrapper>
-  Dat Home
+  <button 
+    mat-stroked-button 
+    color="primary" 
+    (click)="router.navigateByUrl('/fusion')"
+  >
+    Unprocessed Fusion Order Items: <span>{{unprocessedFusion}}</span>
+  </button>
 </app-dashboard-wrapper>

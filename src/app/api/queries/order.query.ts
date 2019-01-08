@@ -17,6 +17,27 @@ export const allOrdersQuery: DocumentNode = gql`
   }
 `;
 
+export const unprocessedFusionQuery: DocumentNode = gql`
+  query unprocessedFusion {
+    allOrderItems(filter: {
+      productSku: {
+        equalTo: "fusion"
+      },
+      isProcessed: {
+        equalTo: false
+      }
+    }) {
+      nodes {
+        id,
+        orderId,
+        size,
+        orientation,
+        fusionType
+      }
+    }
+  }
+`;
+
 export const orderByIdQuery: DocumentNode = gql`
   query orderById($orderId: UUID!) {
     orderById(id: $orderId) {

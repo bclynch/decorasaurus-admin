@@ -15,7 +15,8 @@ import {
   MatTableModule,
   MatToolbarModule,
   MatPaginatorModule,
-  MatMenuModule
+  MatMenuModule,
+  MatTooltipModule
 } from '@angular/material';
 import { DashboardWrapperComponent } from './dashboard-wrapper/dashboard-wrapper.component';
 
@@ -36,7 +37,8 @@ import { DashboardWrapperComponent } from './dashboard-wrapper/dashboard-wrapper
     MatTableModule,
     MatToolbarModule,
     MatPaginatorModule,
-    MatMenuModule
+    MatMenuModule,
+    MatTooltipModule
   ],
   exports: [
     MatButtonModule,
@@ -53,7 +55,8 @@ import { DashboardWrapperComponent } from './dashboard-wrapper/dashboard-wrapper
     MatToolbarModule,
     DashboardWrapperComponent,
     MatPaginatorModule,
-    MatMenuModule
+    MatMenuModule,
+    MatTooltipModule
   ]
 })
 export class SharedModule { }

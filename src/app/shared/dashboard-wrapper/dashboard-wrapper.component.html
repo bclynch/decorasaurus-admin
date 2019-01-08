@@ -5,6 +5,9 @@
       <h1>Admin Dashboard</h1>
     </div>
     <div>
+      <button mat-button matTooltip="FloydHub Server Active" color="warn" *ngIf="floydService.fusionIsActive">
+        <mat-icon>warning</mat-icon>
+      </button>
       <button mat-icon-button [matMenuTriggerFor]="menu">
         <mat-icon>account_circle</mat-icon>
       </button>

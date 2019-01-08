@@ -41,3 +41,20 @@ mat-form-field {
     align-items: center;
   }
 }
+
+.section {
+  mat-spinner {
+    width: 20px !important;
+    height: 20px !important;
+    display: inline-block;
+    margin-left: 5px;
+
+    svg {
+      width: 20px !important;
+      height: 20px !important;
+    }
+  }
+  .mat-progress-spinner circle, .mat-spinner circle {
+    stroke: white!important
+  }
+}

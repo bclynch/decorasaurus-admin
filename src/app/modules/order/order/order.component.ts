@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { OrderService } from 'src/app/services/order.service';
 import { MatTableDataSource } from '@angular/material';
 import { APIService } from 'src/app/services/api.service';
+import { UtilService } from 'src/app/services/util.service';
 
 @Component({
   selector: 'app-order',
@@ -21,7 +22,8 @@ export class OrderComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private orderService: OrderService,
-    private apiService: APIService
+    private apiService: APIService,
+    private utilService: UtilService
   ) {
     this.paramsSubscription = this.route.params.subscribe((params) => {
       this.orderService.getOrderById(params.orderId).valueChanges.subscribe(

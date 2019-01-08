@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy, ChangeDetectorRef, ViewChild } from '@ang
 import { MediaMatcher } from '@angular/cdk/layout';
 import { Router } from '@angular/router';
 import { AdminService } from 'src/app/services/admin.service';
+import { FloydService } from 'src/app/services/floyd.service';
 
 @Component({
   selector: 'app-dashboard-wrapper',
@@ -15,7 +16,8 @@ export class DashboardWrapperComponent implements OnInit, OnDestroy {
     { label: 'Home', value: 'home', icon: 'home' },
     { label: 'Products', value: 'products', icon: 'burst_mode' },
     { label: 'Customers', value: 'customers', icon: 'supervisor_account' },
-    { label: 'Orders', value: 'orders', icon: 'receipt' }
+    { label: 'Orders', value: 'orders', icon: 'receipt' },
+    { label: 'Fusion', value: 'fusion', icon: 'call_merge' }
   ];
 
   private _mobileQueryListener: () => void;
@@ -24,7 +26,8 @@ export class DashboardWrapperComponent implements OnInit, OnDestroy {
     changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher,
     private router: Router,
-    private adminService: AdminService
+    private adminService: AdminService,
+    private floydService: FloydService
   ) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();

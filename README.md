@@ -13,6 +13,13 @@
     - https://stackoverflow.com/questions/14964035/how-to-export-javascript-array-info-to-csv-on-client-side
 - ~~Order item page~~
   - Ability to process fusions
+    - ~~Maybe have its own section on the sidebar or at least an order items area to filter.~~
+    - ~~A count on the homepage of the dashboard of the fusion order items not processed with a link to see them would be nice.~~
+    - A specific page with ability to: 
+      - ~~Turn on floyd server~~
+      - Go one by one on the order items
+      - ~~Turn off floyd server would be great.~~
+    - Eventually an auto turn off or something of the floyd server would be nice and a nice big sign / notification on the dashboard that it's on would be cool. Maybe set a cron job even to auto turn off after 30 mins?
 
 ## Inspiration
   - Will need a role for our poster admin accounts that would have access to orders, but probably not the rest and then an admin dash which has orders, customers, sales, usage analytics, reports, and other good stuff

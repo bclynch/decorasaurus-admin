@@ -3,6 +3,7 @@ import { MatSort, MatTableDataSource, MatPaginator } from '@angular/material';
 import { SubscriptionLike } from 'rxjs';
 import { OrderService } from 'src/app/services/order.service';
 import { Router } from '@angular/router';
+import { UtilService } from 'src/app/services/util.service';
 
 @Component({
   selector: 'app-orders',
@@ -23,7 +24,8 @@ export class OrdersComponent implements OnInit, OnDestroy {
 
   constructor(
     private orderService: OrderService,
-    private router: Router
+    private router: Router,
+    private utilService: UtilService
   ) {
 
   }

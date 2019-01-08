@@ -14,7 +14,7 @@ import {
 } from '../api/mutations/admin.mutation';
 
 import { currentAdminQuery } from '../api/queries/admin.query';
-import { allOrdersQuery, orderByIdQuery } from '../api/queries/order.query';
+import { allOrdersQuery, orderByIdQuery, unprocessedFusionQuery } from '../api/queries/order.query';
 import { allCustomersQuery, customerByIdQuery } from '../api/queries/customer.query';
 import { allProductsQuery, productBySkuQuery } from '../api/queries/product.query';
 
@@ -36,11 +36,19 @@ export class APIService {
       query: currentAdminQuery
     });
   }
+
   getAllOrders(): any {
     return this.apollo.watchQuery<any>({
       query: allOrdersQuery
     });
   }
+
+  getUnprocessedFusion(): any {
+    return this.apollo.watchQuery<any>({
+      query: unprocessedFusionQuery
+    });
+  }
+
   getOrderById(orderId: string): any {
     return this.apollo.watchQuery<any>({
       query: orderByIdQuery,
@@ -49,11 +57,13 @@ export class APIService {
       }
     });
   }
+
   getAllCustomers(): any {
     return this.apollo.watchQuery<any>({
       query: allCustomersQuery
     });
   }
+
   getCustomerById(customerId: string): any {
     return this.apollo.watchQuery<any>({
       query: customerByIdQuery,
@@ -62,11 +72,13 @@ export class APIService {
       }
     });
   }
+
   getAllProducts(): any {
     return this.apollo.watchQuery<any>({
       query: allProductsQuery
     });
   }
+
   getProductBySku(productSku: string): any {
     return this.apollo.watchQuery<any>({
       query: productBySkuQuery,
@@ -100,6 +112,52 @@ export class APIService {
         password
       }
     });
+  }
+
+  // fusion
+  checkFusionServerActive() {
+    return this.http.get(`${ENV.apiBaseURL}/floyd/is-active`)
+    .pipe(map(
+        (response: Response) => {
+          const data = response.json();
+          return data;
+        }
+      )
+    ).pipe(catchError(
+        (error: Response) => {
+          return Observable.throw('Something went wrong');
+        }
+    ));
+  }
+
+  turnOnFusionServer() {
+    return this.http.get(`${ENV.apiBaseURL}/floyd/turn-on-server`)
+    .pipe(map(
+        (response: Response) => {
+          const data = response.json();
+          return data;
+        }
+      )
+    ).pipe(catchError(
+        (error: Response) => {
+          return Observable.throw('Something went wrong');
+        }
+    ));
+  }
+
+  turnOffFusionServer() {
+    return this.http.get(`${ENV.apiBaseURL}/floyd/turn-off-server`)
+    .pipe(map(
+        (response: Response) => {
+          const data = response.json();
+          return data;
+        }
+      )
+    ).pipe(catchError(
+        (error: Response) => {
+          return Observable.throw('Something went wrong');
+        }
+    ));
   }
 
   // shippo

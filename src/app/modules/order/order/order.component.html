@@ -37,7 +37,7 @@
           <!-- Id Column -->
           <ng-container matColumnDef="id">
             <th mat-header-cell *matHeaderCellDef > Id </th>
-            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+            <td mat-cell *matCellDef="let element"> {{utilService.truncateId(element.id)}} </td>
           </ng-container>
         
           <!-- Quantity Column -->

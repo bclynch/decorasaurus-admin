@@ -17,4 +17,8 @@ export class OrderService {
   getAllOrders() {
     return this.apiService.getAllOrders();
   }
+
+  getUnprocessedFusion() {
+    return this.apiService.getUnprocessedFusion();
+  }
 }

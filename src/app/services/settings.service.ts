@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable} from 'rxjs';
 import { AdminService } from './admin.service';
+import { FloydService } from './floyd.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,8 @@ export class SettingsService {
   private _subject: BehaviorSubject<any>;
 
   constructor(
-    private adminService: AdminService
+    private adminService: AdminService,
+    private floydService: FloydService
   ) {
     this._subject = new BehaviorSubject<boolean>(false);
     this.appInited = this._subject;
@@ -18,7 +20,11 @@ export class SettingsService {
 
   appInit() {
     this.adminService.fetchUser().then(
-      () => this._subject.next(true)
+      () => {
+        this.floydService.init().then(
+          () => this._subject.next(true)
+        );
+      }
     );
   }
 }
