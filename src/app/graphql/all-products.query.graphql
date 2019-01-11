@@ -1,0 +1,10 @@
+query allProducts {
+  allProducts {
+    nodes {
+      sku,
+      name,
+      slug,
+      status
+    }
+  }
+}

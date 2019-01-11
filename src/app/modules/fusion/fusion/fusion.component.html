@@ -52,7 +52,13 @@
       <!-- Process Column -->
       <ng-container matColumnDef="process">
         <th mat-header-cell *matHeaderCellDef></th>
-        <td mat-cell *matCellDef="let element"><button mat-button color="primary">Process</button></td>
+        <td mat-cell *matCellDef="let element">
+          <button 
+            mat-button 
+            color="primary"
+            (click)="floydService.processFusion(element)"  
+          >Process</button>
+        </td>
       </ng-container>
     
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

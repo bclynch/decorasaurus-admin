@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SubscriptionLike } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { CustomerService } from 'src/app/services/customer.service';
+import { CustomerById } from 'src/app/generated/graphql';
 
 @Component({
   selector: 'app-customer',
@@ -10,7 +11,7 @@ import { CustomerService } from 'src/app/services/customer.service';
 })
 export class CustomerComponent implements OnInit {
 
-  customer;
+  customer: CustomerById.CustomerById;
 
   paramsSubscription: SubscriptionLike;
 
@@ -19,9 +20,9 @@ export class CustomerComponent implements OnInit {
     private customerService: CustomerService,
   ) {
     this.paramsSubscription = this.route.params.subscribe((params) => {
-      this.customerService.getCustomerById(params.customerId).valueChanges.subscribe(
-        ({ data }) => {
-          this.customer = data.customerById;
+      this.customerService.getCustomerById(params.customerId).subscribe(
+        (customer) => {
+          this.customer = customer;
           console.log(this.customer);
         }
       );

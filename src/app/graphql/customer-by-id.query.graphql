@@ -1,0 +1,14 @@
+query customerById($customerId: UUID!) {
+  customerById(id: $customerId) {
+    id,
+    firstName,
+    lastName,
+    createdAt,
+    ordersByCustomerId {
+      nodes {
+        id,
+        createdAt
+      }
+    }
+  }
+}

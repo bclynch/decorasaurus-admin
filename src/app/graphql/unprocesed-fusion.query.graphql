@@ -1,0 +1,27 @@
+query unprocessedFusion {
+  allOrderItems(filter: {
+    productSku: {
+      equalTo: "fusion"
+    },
+    isProcessed: {
+      equalTo: false
+    }
+  }) {
+    nodes {
+      id,
+      orderId,
+      size,
+      orientation,
+      fusionType,
+      productLinksByOrderItemId(filter: {
+        type: {
+          equalTo: CROP
+        }
+      }) {
+        nodes {
+          url
+        }
+      }
+    }
+  }
+}

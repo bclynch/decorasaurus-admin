@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SubscriptionLike } from 'rxjs';
 import { OrderService } from 'src/app/services/order.service';
 import { Router } from '@angular/router';
@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class HomeComponent implements OnInit {
 
   unprocessedFusion: number;
 
@@ -20,14 +20,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.fusionSubscription = this.orderService.getUnprocessedFusion().valueChanges.subscribe(
-      ({ data }) => {
-        this.unprocessedFusion = data.allOrderItems.nodes.length;
-      }
+    this.fusionSubscription = this.orderService.getUnprocessedFusion().subscribe(
+      (fusions) => this.unprocessedFusion = fusions.length
     );
-  }
-
-  ngOnDestroy() {
-    this.fusionSubscription.unsubscribe();
   }
 }

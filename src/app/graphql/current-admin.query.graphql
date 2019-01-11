@@ -1,0 +1,6 @@
+query currentAdmin {
+  currentAdmin {
+    id,
+    email
+  }
+}

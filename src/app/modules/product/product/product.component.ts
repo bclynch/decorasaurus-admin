@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SubscriptionLike } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from 'src/app/services/product.service';
+import { ProductBySku } from 'src/app/generated/graphql';
 
 @Component({
   selector: 'app-product',
@@ -10,7 +11,7 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class ProductComponent implements OnInit {
 
-  product;
+  product: ProductBySku.ProductBySku;
 
   paramsSubscription: SubscriptionLike;
 
@@ -18,10 +19,10 @@ export class ProductComponent implements OnInit {
     private route: ActivatedRoute,
     private productService: ProductService
   ) {
-    this.paramsSubscription = this.route.params.subscribe((params) => {
-      this.productService.getProductBySku(params.productSku).valueChanges.subscribe(
-        ({ data }) => {
-          this.product = data.productBySku;
+    this.route.params.subscribe((params) => {
+      this.productService.getProductBySku(params.productSku).subscribe(
+        (product) => {
+          this.product = product;
           console.log(this.product);
         }
       );

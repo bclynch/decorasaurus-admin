@@ -1,0 +1,11 @@
+mutation updateOrderItemById($id: UUID!) {
+  updateOrderItemById(input: {
+    id: $id,
+    orderItemPatch: {
+      isProcessed: true
+    }
+  })
+  {
+    clientMutationId
+  }
+}

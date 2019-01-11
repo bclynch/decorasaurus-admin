@@ -5,6 +5,7 @@ import { OrderService } from 'src/app/services/order.service';
 import { MatTableDataSource } from '@angular/material';
 import { APIService } from 'src/app/services/api.service';
 import { UtilService } from 'src/app/services/util.service';
+import { OrderById } from 'src/app/generated/graphql';
 
 @Component({
   selector: 'app-order',
@@ -13,7 +14,7 @@ import { UtilService } from 'src/app/services/util.service';
 })
 export class OrderComponent implements OnInit {
 
-  order;
+  order: OrderById.OrderById;
   displayedColumns: string[] = ['name', 'id', 'quantity', 'pdfUrl'];
   dataSource;
 
@@ -26,9 +27,9 @@ export class OrderComponent implements OnInit {
     private utilService: UtilService
   ) {
     this.paramsSubscription = this.route.params.subscribe((params) => {
-      this.orderService.getOrderById(params.orderId).valueChanges.subscribe(
-        ({ data }) => {
-          this.order = data.orderById;
+      this.orderService.getOrderById(params.orderId).subscribe(
+        (order) => {
+          this.order = order;
           console.log(this.order);
           const items = this.order.orderItemsByOrderId.nodes.map((item) => ({ name: item.productByProductSku.name, quantity: item.quantity, id: item.id, pdfUrl: item.productLinksByOrderItemId.nodes.filter((url) => url.type === 'PDF')[0].url }));
           console.log(items);

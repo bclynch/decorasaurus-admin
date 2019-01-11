@@ -1,0 +1,10 @@
+query allCustomers {
+  allCustomers {
+    nodes {
+      id,
+      firstName,
+      lastName,
+      createdAt
+    }
+  }
+}

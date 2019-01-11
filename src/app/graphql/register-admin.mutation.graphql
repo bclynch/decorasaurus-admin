@@ -1,0 +1,11 @@
+mutation registerAdminAccount($email: String!, $password: String!) {
+  registerAdminAccount(input: {
+    email: $email,
+    password: $password
+  })
+  {
+    customer {
+      id
+    }
+  }
+}

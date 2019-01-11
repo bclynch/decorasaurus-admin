@@ -1,6 +1,5 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
-import { SubscriptionLike } from 'rxjs';
 import { CustomerService } from 'src/app/services/customer.service';
 import { Router } from '@angular/router';
 
@@ -9,7 +8,7 @@ import { Router } from '@angular/router';
   templateUrl: './customers.component.html',
   styleUrls: ['./customers.component.scss']
 })
-export class CustomersComponent implements OnInit, OnDestroy {
+export class CustomersComponent implements OnInit {
 
   // customer props
   customers;
@@ -19,27 +18,21 @@ export class CustomersComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  customersSubscription: SubscriptionLike;
-
   constructor(
     private customerService: CustomerService,
     private router: Router
   ) { }
 
   ngOnInit() {
-    this.customersSubscription = this.customerService.getAllCustomers().valueChanges.subscribe(
-      ({ data }) => {
-        this.customers = data.allCustomers.nodes.map((customer) => ({ id: customer.id, firstName: customer.firstName, lastName: customer.lastName, date: customer.createdAt }) );
+    this.customerService.getAllCustomers().subscribe(
+      (customers) => {
+        this.customers = customers.map((customer) => ({ id: customer.id, firstName: customer.firstName, lastName: customer.lastName, date: customer.createdAt }) );
         this.dataSource = new MatTableDataSource(this.customers);
         console.log(this.customers);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
       }
     );
-  }
-
-  ngOnDestroy() {
-    this.customersSubscription.unsubscribe();
   }
 
   applyFilter(filterValue: string) {

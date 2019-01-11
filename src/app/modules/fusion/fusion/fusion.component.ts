@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort, MatPaginator, MatTableDataSource } from '@angular/material';
 import { SubscriptionLike } from 'rxjs';
 import { OrderService } from 'src/app/services/order.service';
@@ -12,7 +12,7 @@ import { FloydService } from 'src/app/services/floyd.service';
   templateUrl: './fusion.component.html',
   styleUrls: ['./fusion.component.scss']
 })
-export class FusionComponent implements OnInit, OnDestroy {
+export class FusionComponent implements OnInit {
 
   // fusion props
   fusions;
@@ -23,7 +23,6 @@ export class FusionComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  fusionSubscription: SubscriptionLike;
   loadingServerSubscription: SubscriptionLike;
   settingsSubscription: SubscriptionLike;
 
@@ -41,9 +40,9 @@ export class FusionComponent implements OnInit, OnDestroy {
   }
 
   init() {
-    this.fusionSubscription = this.orderService.getUnprocessedFusion().valueChanges.subscribe(
-      ({ data }) => {
-        this.fusions = data.allOrderItems.nodes.map((fusion) => ({ id: fusion.id, orderId: fusion.orderId, type: fusion.fusionType, orientation: fusion.orientation, size: fusion.size }) );
+    this.orderService.getUnprocessedFusion().subscribe(
+      (fusions) => {
+        this.fusions = fusions.map((fusion) => ({ id: fusion.id, orderId: fusion.orderId, type: fusion.fusionType, orientation: fusion.orientation, size: fusion.size, cropUrl: fusion.productLinksByOrderItemId.nodes[0].url }) );
         this.dataSource = new MatTableDataSource(this.fusions);
         console.log(this.fusions);
         this.dataSource.paginator = this.paginator;
@@ -53,10 +52,6 @@ export class FusionComponent implements OnInit, OnDestroy {
     this.loadingServerSubscription = this.floydService.serverActionIsLoading.subscribe(
       loading => this.loadingServer = loading
     );
-  }
-
-  ngOnDestroy() {
-    this.fusionSubscription.unsubscribe();
   }
 
 }

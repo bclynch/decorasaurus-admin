@@ -9,10 +9,12 @@ import { AppComponent } from './app.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ENV } from '../environments/environment';
 
-import { HttpLinkModule, HttpLink } from 'apollo-angular-link-http';
-import { InMemoryCache } from 'apollo-cache-inmemory';
-import { ApolloModule, Apollo } from 'apollo-angular';
-import { setContext } from 'apollo-link-context';
+// import { HttpLinkModule, HttpLink } from 'apollo-angular-link-http';
+// import { InMemoryCache } from 'apollo-cache-inmemory';
+// import { ApolloModule, Apollo } from 'apollo-angular';
+// import { setContext } from 'apollo-link-context';
+// Apollo
+import { GraphQLModule } from './graphql.module';
 
 import { CookieService } from 'ngx-cookie-service';
 import { SettingsService } from './services/settings.service';
@@ -33,11 +35,12 @@ import { RoleGuardService } from './services/roleGuard.service';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    HttpLinkModule,
-    ApolloModule,
+    // HttpLinkModule,
+    // ApolloModule,
     HttpModule,
     SharedModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    GraphQLModule
   ],
   providers: [
     CookieService,
@@ -54,28 +57,28 @@ import { RoleGuardService } from './services/roleGuard.service';
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor(
-    apollo: Apollo,
-    httpLink: HttpLink,
-    private cookieService: CookieService
-  ) {
-    const http = httpLink.create({ uri: ENV.apolloBaseURL });
+  // constructor(
+  //   apollo: Apollo,
+  //   httpLink: HttpLink,
+  //   private cookieService: CookieService
+  // ) {
+  //   const http = httpLink.create({ uri: ENV.apolloBaseURL });
 
-    let link;
-    const token = this.cookieService.get('decorasaurus-token');
-    if (token && token !== 'null') {
-      const middleware = setContext(() => ({
-        headers: new HttpHeaders().set('Authorization', token ? `Bearer ${token}` : null)
-      }));
+  //   let link;
+  //   const token = this.cookieService.get('decorasaurus-token');
+  //   if (token && token !== 'null') {
+  //     const middleware = setContext(() => ({
+  //       headers: new HttpHeaders().set('Authorization', token ? `Bearer ${token}` : null)
+  //     }));
 
-      link = middleware.concat(http);
-    } else {
-      link = http;
-    }
+  //     link = middleware.concat(http);
+  //   } else {
+  //     link = http;
+  //   }
 
-    apollo.create({
-      link,
-      cache: new InMemoryCache()
-    });
-  }
+  //   apollo.create({
+  //     link,
+  //     cache: new InMemoryCache()
+  //   });
+  // }
 }
